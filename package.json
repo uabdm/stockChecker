@@ -1,0 +1,27 @@
+{
+    "name": "stockhecker",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "npx parcel frontend/index.html"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/uabdm/stockChecker.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/uabdm/stockChecker/issues"
+    },
+    "homepage": "https://github.com/uabdm/stockChecker#readme",
+    "dependencies": {
+        "dotenv": "^16.0.3"
+    },
+    "devDependencies": {
+        "parcel": "^2.8.3"
+    }
+}
