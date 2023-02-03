@@ -19,7 +19,7 @@ async function stockChecker(stockSymbol) {
     content.innerHTML = `The 5 day EMA is ${fiveDayEMA} and the 20 day SMA is ${twentyDaySMA}. This equates to a percentage difference of ${percentageDiff}`;
 
     if (percentageDiff < 3 && percentageDiff > -3) {
-        content.innerHTML = `The 5 day EMA is ${fiveDayEMA} and the 20 day SMA is ${twentyDaySMA}. This equates to a percentage difference of ${percentageDiff}. <strong>This is a buy signal</strong>`;
+        content.innerHTML = `The 5 day EMA is ${fiveDayEMA} and the 20 day SMA is ${twentyDaySMA}. This equates to a percentage difference of ${percentageDiff}. <strong>Add to watchlist.</strong>`;
     } else {
         content.innerHTML = `The 5 day EMA is ${fiveDayEMA} and the 20 day SMA is ${twentyDaySMA}. This equates to a percentage difference of ${percentageDiff}.`;
     }
