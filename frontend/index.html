@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Load Font Awesome 5 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script type="module" defer src="./static/main.js"></script>
@@ -19,7 +22,10 @@
                 <input type="text" class="form-control" id="inputText">
             </div>
             <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+            <button id="addtowatchlist" type="button" class="btn btn-success">Add to Watchlist</button>
             <div id="content" style="padding-top: 10px"></div>
+            <div style="padding-top: 10px">Watchlist:</div>
+            <div id="watchlist" style="padding-top: 10px"></div>
         </form>
     </div>
 </body>
