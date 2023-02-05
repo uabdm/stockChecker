@@ -1,9 +1,24 @@
+// Define the removeStock function initially so its available when the removeStock onclick event is triggered
+window.removeStock = function(event) {
+    let stockSymbol = event.target.id;
+    let watchlist = JSON.parse(localStorage.getItem("watchlist"));
+    let index = watchlist.indexOf(stockSymbol);
+    watchlist.splice(index, 1);
+    localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    const watchlistcontent = document.getElementById("watchlist");
+    watchlistcontent.innerHTML = '';
+    for (let i = 0; i < watchlist.length; i++) {
+        watchlistcontent.innerHTML += `<li style="list-style-type: none;">${watchlist[i]}<i id=${watchlist[i]} class="fas fa-trash pl-3" onClick="removeStock(event)"></i></li>`;
+    }
+}
+
+
 // initially load the watchlist from local storage and add the stock symbols to the watchlistcontent element
 const watchlistcontent = document.getElementById("watchlist");
 let watchlist = JSON.parse(localStorage.getItem("watchlist"));
 if (watchlist !== null) {
     for (let i = 0; i < watchlist.length; i++) {
-        watchlistcontent.innerHTML += `<li>${watchlist[i]}<i id=${watchlist[i]} class="fas fa-trash pl-3"></i></li>`;
+        watchlistcontent.innerHTML += `<li style="list-style-type: none;">${watchlist[i]}<i id=${watchlist[i]} class="fas fa-trash pl-3" onClick="removeStock(event)"></i></li>`;
     }
 }
 
@@ -18,7 +33,6 @@ submitButton.addEventListener("click", function(e) {
 // add event listener to the watchlist button that adds the stock symbol to the watchlist
 const watchlistButton = document.getElementById("addtowatchlist");
 watchlistButton.addEventListener("click", function(e) {
-    console.log('watchlist button');
     let stockSymbol = document.getElementById("inputText").value.toUpperCase();
     // get the watchlist from local storage
     let watchlist = JSON.parse(localStorage.getItem("watchlist"));
@@ -38,14 +52,13 @@ watchlistButton.addEventListener("click", function(e) {
             console.log('Stock symbol already in watchlist');
         }
     }
-    console.log(watchlist);
     const watchlistcontent = document.getElementById("watchlist");
     // get the watchlist from local storage and pull out the separate stock symbols
     // loop through the stock symbols and add them to the watchlistcontent element
     watchlist = JSON.parse(localStorage.getItem("watchlist"));
     watchlistcontent.innerHTML = '';
     for (let i = 0; i < watchlist.length; i++) {
-        watchlistcontent.innerHTML += `<li>${watchlist[i]}<i id=${watchlist[i]} class="fas fa-trash pl-3"></i></li>`;
+        watchlistcontent.innerHTML += `<li style="list-style-type: none;">${watchlist[i]}<i id=${watchlist[i]} class="fas fa-trash pl-3" onClick="removeStock(event)"></i></li>`;
     }
 });
 
@@ -105,7 +118,6 @@ async function getSMA(stockSymbol) {
     try {
         const response = await fetch(`https://www.alphavantage.co/query?function=SMA&symbol=${stockSymbol}&interval=daily&time_period=20&series_type=open&apikey=${process.env.API_KEY}`);
         const data = await response.json();
-        console.log(data);
         const firstSMA = Object.values(data["Technical Analysis: SMA"])[0].SMA;
         return firstSMA;
     } catch (error) {
@@ -113,30 +125,5 @@ async function getSMA(stockSymbol) {
     }
 }
 
-// add event listeners to all the trash icons
-// if the trash icon is clicked, remove the stock symbol from the watchlist
-const trashIcons = document.querySelectorAll(".fa-trash");
-trashIcons.forEach(function(trashIcon) {
-    trashIcon.addEventListener("click", function(e) {
-        let stockSymbol = e.target.id;
-        // get the watchlist from local storage
-        let watchlist = JSON.parse(localStorage.getItem("watchlist"));
-        // if the watchlist is not empty, check if the stock symbol is already in the watchlist
-        if (watchlist.indexOf(stockSymbol) !== -1) {
-            // if the stock symbol is in the watchlist, remove it
-            watchlist.splice(watchlist.indexOf(stockSymbol), 1);
-            localStorage.setItem("watchlist", JSON.stringify(watchlist));
-        } else {
-            // if the stock symbol is not in the watchlist, do nothing
-            console.log('Stock symbol not in watchlist');
-        }
-        const watchlistcontent = document.getElementById("watchlist");
-        // get the watchlist from local storage and pull out the separate stock symbols
-        // loop through the stock symbols and add them to the watchlistcontent element
-        watchlist = JSON.parse(localStorage.getItem("watchlist"));
-        watchlistcontent.innerHTML = '';
-        for (let i = 0; i < watchlist.length; i++) {
-            watchlistcontent.innerHTML += `<li>${watchlist[i]}<i id=${watchlist[i]} class="fas fa-trash pl-3"></i></li>`;
-        }
-    });
-});
+
+
