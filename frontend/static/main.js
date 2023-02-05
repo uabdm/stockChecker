@@ -1,5 +1,10 @@
 import stockChecker from './stockChecker.js';
 
+function getWatchListContent(watchlist, i) {
+    const watchlistInnerHTML = `<li style="list-style-type: none;"><a style="color:#28a745" href="https://stockcharts.com/h-sc/ui?s=${watchlist[i]}" target="_blank">${watchlist[i]}</a><i id=${watchlist[i]} class="fas fa-trash pl-3" onClick="removeStock(event)"></i></li>`;
+    return watchlistInnerHTML;
+}
+
 // Define the removeStock function initially so its available when the removeStock onclick event is triggered
 window.removeStock = function(event) {
     let stockSymbol = event.target.id;
@@ -10,7 +15,7 @@ window.removeStock = function(event) {
     const watchlistcontent = document.getElementById("watchlist");
     watchlistcontent.innerHTML = '';
     for (let i = 0; i < watchlist.length; i++) {
-        watchlistcontent.innerHTML += `<li style="list-style-type: none;">${watchlist[i]}<i id=${watchlist[i]} class="fas fa-trash pl-3" onClick="removeStock(event)"></i></li>`;
+        watchlistcontent.innerHTML += getWatchListContent(watchlist, i);
     }
 }
 
@@ -20,7 +25,7 @@ const watchlistcontent = document.getElementById("watchlist");
 let watchlist = JSON.parse(localStorage.getItem("watchlist"));
 if (watchlist !== null) {
     for (let i = 0; i < watchlist.length; i++) {
-        watchlistcontent.innerHTML += `<li style="list-style-type: none;">${watchlist[i]}<i id=${watchlist[i]} class="fas fa-trash pl-3" onClick="removeStock(event)"></i></li>`;
+        watchlistcontent.innerHTML += getWatchListContent(watchlist, i);
     }
 }
 
@@ -60,7 +65,7 @@ watchlistButton.addEventListener("click", function(e) {
     watchlist = JSON.parse(localStorage.getItem("watchlist"));
     watchlistcontent.innerHTML = '';
     for (let i = 0; i < watchlist.length; i++) {
-        watchlistcontent.innerHTML += `<li style="list-style-type: none;">${watchlist[i]}<i id=${watchlist[i]} class="fas fa-trash pl-3" onClick="removeStock(event)"></i></li>`;
+        watchlistcontent.innerHTML += getWatchListContent(watchlist, i);
     }
 });
 
